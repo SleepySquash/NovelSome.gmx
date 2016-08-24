@@ -1,0 +1,16 @@
+skindat.drawDialogueFrom="";
+skindat.drawGamePauseFrom="";
+skindat.drawLoadingFrom="";
+skindat.drawSaveFrom="";
+skindat.drawLoadFrom="";
+skindat.drawOptionsFrom="";
+ds_map_clear(skindat.events);
+global.dialMaxAlpha=0.6; global.dialTxtOffx=15; global.dialTextFont=Neucha18; global.dDrawFont=global.dialTextFont; global.dialNBoxOffx=0; global.dialFullbox=sprDial_fullbox;
+global.dialBox=sprDial_box; global.dialNamebox=sprDial_namebox; global.dialForcedBClr=0; global.dialTxtOffy=10; global.dialChooseClr=c_orange;
+global.dialAlphaGain=0.09; global.dialBoxOffx=20; global.dialBoxOffy=20; global.dialBoxHeight=110; global.dialNBoxOff=3; global.dialTextWidth=0;
+global.dialNBoxWidth=160; global.dialNBoxHeight=36; global.dialTextSep=25; global.dialTextClr=c_white; global.dialBoxNoScale=0; global.dialBoxBorderedTexture=1;
+global.dialIsCback=1; global.dialBackClr=c_dkgray; global.dialBackOutclr=c_white; global.dialBackAlpha=0.5; global.dialOffFromCenter=0;
+global.mBack_path=global.mSBack_path; global.menuMusic=global.menuSMusic; global.mButtonClr=c_white; global.dDrawFont_t='Franklin18';
+global.mBackBlur_path=global.mSBackBlur_path; global.musicMStart=0; global.mButtonOutClr=c_dkgray; global.dialTextFont_t='Franklin18';
+global.dialFBoxOffx=20; global.dialFBoxOffy=20; global.dialFTxtOffx=10; global.dialFTxtOffy=10; global.dialFOffFromCenter=0; global.dialFBoxNoScale=0;
+global.dialFMaxAlpha=0.7; global.dialTextOl=1; global.dialNTextOl=1; global.dialTextOClr=c_black; ds_map_clear(skindat.events);

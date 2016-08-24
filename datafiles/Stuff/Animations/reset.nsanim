@@ -1,0 +1,8 @@
+nowait
+fadeto 1
+time 30
+nowait
+scale reset
+time 30
+position reset
+time 30

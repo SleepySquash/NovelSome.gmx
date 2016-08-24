@@ -1,0 +1,1 @@
+global.viewMaxSpeed=-1;

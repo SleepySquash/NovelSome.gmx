@@ -1,0 +1,44 @@
+using NovelSomeScript
+
+name "Sample"
+name:Русский "Сэмпл"
+novelid -1
+
+void OnScan
+    //Вызывается при сканировании новелл.
+    ;description "lol"
+    ;author "SleepySquash"
+    ;background "7e34c87b572be285d0876f811b42458d4.jpg"
+    ;customMenu "menu\menu.nsmenu"
+    ;music "music\Yakui The Maid - Continium.ogg" from 48
+    ;var madeProgress = file.loadvalue("gameinfo.txt","MadeProgress")
+end
+
+void OnNovelMenuStart
+    //Вызывается при запуске меню новеллы.
+    /*gameJustStarted: истина, если при запуске новелсама
+        запустилось сразу меню новеллы, а не меню новелсама.*/
+    ;if gameJustStarted
+    ;    notification "Hi!" purple
+    ;else
+    ;    notification "Hi again!" yellow
+    ;end
+end
+
+void NovelStart
+    //Вызывается при запуске любого сценария.
+    ;skin "skins/normal.nskin"
+end
+
+void OnSave
+    //Вызывается при сохранении прогресса.
+    ;file.savevalue("gameinfo.txt","MadeProgress",someInteger)
+end
+
+void OnLoad
+    //Вызывается при загрузке прогресса.
+end
+
+void GameExit
+    //Вызывается при выходе из новеллы (выход в меню или из игры).
+end

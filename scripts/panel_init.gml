@@ -1,0 +1,9 @@
+bx1=0
+bx2=0
+by1=0
+by2=0
+cx=0
+cy=0
+global.__panel=argument0
+global.__panelc=argument1
+global.__panels=sprite_get_width(argument0)

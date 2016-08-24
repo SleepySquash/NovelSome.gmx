@@ -1,0 +1,16 @@
+animation nowait
+scale 1.4
+time 30
+repeat start
+repeat count 0
+scale 0.7
+time 60
+scale 1.4
+time 60
+scalex 1.8
+time 10
+scaley 2
+time 10
+scale reset
+time 30
+repeat end

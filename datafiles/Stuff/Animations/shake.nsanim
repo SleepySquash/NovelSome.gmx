@@ -1,0 +1,6 @@
+movexy -15 -2
+time 3
+movexy 30 4
+time 6
+movexy -15 -2
+time 3

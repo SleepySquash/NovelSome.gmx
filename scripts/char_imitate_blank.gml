@@ -1,0 +1,14 @@
+novdat.char[argument0,argument1]=""; novdat.charanim[argument0,argument1]=""; novdat.dchar[argument0,argument1]="";
+novdat.charimg[argument0,argument1]=""; novdat.charf[argument0,argument1]="";
+novdat.charimg_close[argument0,argument1]="";
+    novdat.charimg_closeoffx_set[argument0,argument1]=0; novdat.charimg_closeoffy_set[argument0,argument1]=0;
+    novdat.charimg_closeoffx[argument0,argument1]=0; novdat.charimg_closeoffy[argument0,argument1]=0;
+novdat.charimg_far[argument0,argument1]="";
+    novdat.charimg_faroffx_set[argument0,argument1]=0; novdat.charimg_faroffy_set[argument0,argument1]=0;
+    novdat.charimg_faroffx[argument0,argument1]=0; novdat.charimg_faroffy[argument0,argument1]=0;
+novdat.charimg_normal[argument0,argument1]="";
+    novdat.charimg_normaloffx_set[argument0,argument1]=0; novdat.charimg_normaloffy_set[argument0,argument1]=0;
+    novdat.charimg_normaloffx[argument0,argument1]=0; novdat.charimg_normaloffy[argument0,argument1]=0;
+novdat.charanim[argument0,argument1]=""; novdat.charscn[argument0,argument1]=0;
+novdat.charclr[argument0,argument1]=c_white; novdat.charoutclr[argument0,argument1]=c_black;
+novdat.charperson[argument0,argument1]=noone; novdat.charoflist[argument0,argument1]=ds_list_create();
