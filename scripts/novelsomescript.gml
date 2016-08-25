@@ -214,7 +214,8 @@ else if ((nss_check("background add ") || nss_check("background ")) && nss_do_co
             _nogamenolife=0; if (_doingfrom.object_index!=novel) {_person.nogamenolife=1; _nogamenolife=1; _person.followalpha=_doingfrom;} _person.shDepth=_depth;
             _person.rpath=_path; _person.rfname=fname; if (!_nogamenolife) {if (nowait) {_person.telled=1;} if (isSkip) {_person.alpha=_person.fadeinmax;} waitingForComplete=1;}}
         else {if (string_copy(fname,1,1) != '"') {fname = string_convert_tovar(_str1);} else {fname=_str1;}
-        ext=string_lower(filename_ext(fname)); if (ext==".nsback" || ext==".jpg" || ext==".jpeg" || ext==".png" || ext=".gif" || ext=".bmp") {_originalfname=fname;
+        ext=string_lower(filename_ext(fname)); if (filename_ext(fname) == "") {fname+=".jpg";}
+        if (ext==".nsback" || ext==".jpg" || ext==".jpeg" || ext==".png" || ext=".gif" || ext=".bmp") {_originalfname=fname;
             _path=novdat.FolName[novid]; if (string_copy(fname,1,string_length("Stuff/"))=="Stuff/") {_path=fname;}
             else if (string_copy(fname,1,string_length("Stuff\"))=="Stuff\") {_path=fname;} if (_path!=novdat.FolName[novid]) {fname="";}
             if (fname!="") {if (!file_exists(current_directory()+_path+fname)) {if (file_exists(current_directory()+_path+"backgrounds\"+fname)) {fname="backgrounds\"+fname;}
@@ -285,6 +286,7 @@ else if (nss_check("music ") || nss_check("play music ")) {__rsstr="music "; if 
             ipos+=string_length(_str2)+1;}}}
     if (fname=="stop") {_mmx=global.mFadeMax; _mfi=global.mFadeIn; _mfo=global.mFadeOut; music_play("");
         global.mFadeMax=_mmx; global.mFadeIn=_mfi; global.mFadeOut=_mfo;} else if (fname=="resume") {music_resume();} else {fname=_str1;
+    if (filename_ext(fname) == "") {fname+=".ogg";}
     ext=string_lower(string_copy(fname,string_length(fname)-3,4)); if (ext==".mp3"||ext==".fla"||ext==".wma"||ext==".aac"||ext==".wav") {
         if (global.debug) {with (objGUI_chat) {chat_add_color("Only .ogg files supported (sorry :c)!",c_red);}}}
     else if (ext==".ogg") {_path=novdat.FolName[novid]; if (string_copy(fname,1,string_length("Stuff/"))=="Stuff/") {_path=fname;}
@@ -305,7 +307,7 @@ else if (nss_check("musicfademax ")) {imgnum=string_copy(fstr,string_length("mus
 else if (nss_check("sound ") || nss_check("play sound ")) {__rsstr="sound "; if (nss_check("play sound ")) {__rsstr="play sound ";}
     fname=string_copy(fstr,string_length(__rsstr)+1,string_length(fstr)-string_length(__rsstr));
     if (fname=="stop") {for (i=0;i<instance_number(objEmitter);i+=1) {ab=instance_find(objEmitter,i); if (ab.type=='streamsound') {ab.alarm[1]=1;}}
-        } else {fname=string_replace_all(fname,'"',""); ext=string_lower(string_copy(fname,string_length(fname)-3,4));
+        } else {fname=string_convert_withpluses(fname); if (filename_ext(fname) == "") {fname+=".nsanim";} ext=string_lower(string_copy(fname,string_length(fname)-3,4));
     if (ext==".mp3"||ext==".fla"||ext==".wma"||ext==".aac"||ext==".wav") {if (global.debug) {with (objGUI_chat) {chat_add_color("Only .ogg files supported!",c_red);}}}
     if (ext==".ogg") {_path=novdat.FolName[novid]; if (string_copy(fname,1,string_length("Stuff/"))=="Stuff/") {_path=fname;}
         else if (string_copy(fname,1,string_length("Stuff\"))=="Stuff\") {_path=fname;} if (_path!=novdat.FolName[novid]) {fname="";}
@@ -358,7 +360,7 @@ else if ((nss_check("ambient") || nss_check("play ambient")) && nss_do_command_i
         if (ab.type=='streamambient') {if (_fadeout!=-1) {ab.fadeout=_fadeout;} ab.alarm[1]=1;}}}
     else {if (ds_map_exists(ambients,"ambient"+blnum)) {_va = ds_map_find_value(ambients,"ambient"+blnum);
         if (instance_exists(_va)) {if (_fadeout!=-1) {_va.fadeout=_fadeout;} _va.alarm[1]=1;}}}
-    if (fname=="stop") {} else {fname=_str1; ext=string_lower(string_copy(fname,string_length(fname)-3,4));
+    if (fname=="stop") {} else {fname=_str1; if (filename_ext(fname) == "") {fname+=".ogg";} ext=string_lower(string_copy(fname,string_length(fname)-3,4));
         if (ext==".mp3"||ext==".fla"||ext==".wma"||ext==".aac"||ext==".wav") {if (global.debug) {with (objGUI_chat) {chat_add_color("Only .ogg files supported!",c_red);}}}
         if (ext==".ogg") {_path=novdat.FolName[novid]; if (string_copy(fname,1,string_length("Stuff/"))==" Stuff/") {_path=fname;}
         else if (string_copy(fname,1,string_length("Stuff\"))=="Stuff\") {_path=fname;} if (_path!=novdat.FolName[novid]) {fname="";}
@@ -419,7 +421,7 @@ else if (nss_check("animation ") && nss_do_command_ingame_only()) {_name = strin
                         _str3=string_copy(_str2,string_length("chid:")+1,string_length(_str2)-string_length("chid:"));
                         if (_str3=="all") {chid=0;} else {chid=real(_str3);}}
                     else {nss_afterscript(_str2);} ipos+=string_length(_str2)+1;}}} fname=_str1;
-            _path=""; if (fname!="stop" && fname!="clear" && fname!="none") {
+            _path=""; if (fname!="stop" && fname!="clear" && fname!="none") {if (filename_ext(fname) == "") {fname+=".nsanim";}
             _path=novdat.FolName[novid]; if (string_copy(fname,1,string_length("Stuff/"))=="Stuff/") {_path=fname;} else if (string_copy(fname,1,string_length("Stuff\"))=="Stuff\") {_path=fname;}
             if (_path!=fname) {if (!file_exists(current_directory()+_path+fname)) {if (file_exists(current_directory()+_path+"animation\"+fname)) {fname="animation\"+fname;}
                 else if (file_exists(current_directory()+_path+"animations\"+fname)) {fname="animations\"+fname;}}} else {_path="";}}
@@ -509,7 +511,8 @@ else if (nss_check("hud ")) {fname=string_copy(fstr,string_length("hud ")+1,stri
             if (_fadein!=-1) {_specid.fadein=_fadein;} if (_fadeout!=-1) {_specid.fadeout=_fadeout;}}
         else {for (ni=0;ni<instance_number(objHUD);ni+=1) {with (instance_find(objHUD,ni)) {hudHide=1; fadeouttell=0;
             if (other._fadein!=-1) {fadein=other._fadein;} if (other._fadeout!=-1) {fadeout=other._fadeout;}}}}}
-    else {fnameorigin=fname; _path=novdat.FolName[novid]; if (string_copy(fname,1,string_length("Stuff/"))=="Stuff/") {_path=fname;}
+    else {fnameorigin=fname; if (filename_ext(fname) == "") {fname+=".ndraw";}
+        _path=novdat.FolName[novid]; if (string_copy(fname,1,string_length("Stuff/"))=="Stuff/") {_path=fname;}
         else if (string_copy(fname,1,string_length("Stuff\"))=="Stuff\") {_path=fname;} if (_path!=novdat.FolName[novid]) {fname="";}
         if (fname!="") {if (!file_exists(current_directory()+_path+fname)) {
             if (file_exists(current_directory()+_path+"hud\"+fname)) {fname="hud\"+fname;}
@@ -546,7 +549,8 @@ else if (nss_check("scene ")) {fname=string_convert_withpluses(string_copy(fstr,
     if (fname=="reset") {scene_set("");} /*else if (fname=="hide") {objHUD.hudHide=1; objHUD.doSmooth=1;}*/ else {
     _path=novdat.FolName[novid]; if (string_copy(fstr,1,string_length("scene Stuff/"))=="scene Stuff/") {_path=fname;}
     else if (string_copy(fstr,1,string_length("scene Stuff\"))=="scene Stuff\") {_path=fname;} if (_path!=novdat.FolName[novid]) {fname="";}
-    if (fname!="") {if (!file_exists(current_directory()+_path+fname)) {if (file_exists(current_directory()+_path+"scene\"+fname)) {fname="scene\"+fname;}
+    if (fname!="") {if (filename_ext(fname) == "") {fname+=".nscen";}
+        if (!file_exists(current_directory()+_path+fname)) {if (file_exists(current_directory()+_path+"scene\"+fname)) {fname="scene\"+fname;}
         else if (file_exists(current_directory()+_path+"scenes\"+fname)) {fname="scenes\"+fname;}
         else {__fname=filename_remove_ext(filename_name(fname));
             if (file_exists(current_directory()+_path+"scenes\"+__fname+"\"+fname)) {fname="scenes\"+__fname+"\"+fname;}

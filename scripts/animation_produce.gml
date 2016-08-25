@@ -8,12 +8,15 @@ while (string_copy(fstr,1,1) == " ") {if (string_length(fstr)<=1) {break;} else 
 while (string_copy(fstr,string_length(fstr),1) == " ") {if (string_length(fstr)<=1) {break;} else {fstr = string_copy(fstr,1,string_length(fstr)-1);}}
 
 if (nss_check("move ")) {_byx=string_get_tillsymbol(fstr,string_length("move "),' '); if (_byx!="") {
-    _bytime=0; if (string_copy(line[crline+1],1,string_length('time '))=='time ') {
-        _bytime=string_convert_topos(string_copy(line[crline+1],string_length('time '),string_length(line[crline+1])-string_length('time ')));}
-    ipos=string_length("move ")+string_length(_byx)+2; while (ipos<=string_length(fstr)) {
-        _str2=string_get_tillsymbol(fstr,ipos,' '); if (_str2 == "nowait") {nowait=1;}
+    _bytime=animation_checktime(); _byy=""; _byz=""; ipos=string_length("move ")+string_length(_byx)+2;
+    while (ipos<=string_length(fstr)) {_str2=string_get_tillsymbol(fstr,ipos,' '); if (_str2 == "nowait") {nowait=1;}
         else if (string_copy(_str2,1,string_length("time:")) == "time:") {_bytime=string_convert_topos(string_copy(_str2,string_length("time:"),string_length(fstr)-string_length("time:")));}
-        ipos+=string_length(_str2);}}}
+        else if (string_copy(_str2,1,string_length("x:")) == "x:") {_byx=(string_copy(_str2,string_length("x:"),string_length(fstr)-string_length("x:")));}
+        else if (string_copy(_str2,1,string_length("y:")) == "y:") {_byy=(string_copy(_str2,string_length("x:"),string_length(fstr)-string_length("x:")));}
+        else if (string_copy(_str2,1,string_length("z:")) == "z:") {_byz=(string_copy(_str2,string_length("x:"),string_length(fstr)-string_length("x:")));}
+        else {if (_byy=="") {_byy=_str2;} else if (_byz=="") {_byz=_str2;}}
+        ipos+=string_length(_str2);} timeLeft1=_bytime; timeLeft2=_bytime; timeLeft6=_bytime;
+    if (_byx!="") {xcon=string_convert_topos(_byx);} if (_byy!="") {ycon=string_convert_topos(_byy);} if (_byz!="") {zcon=string_convert_topos(_byz);}}}
 else if (nss_check("repeat start")) {if (crline+1<lineCount) {
     if (string_copy(line[crline+1],1,string_length('repeat count '))=='repeat count ') {
         _rcon=(string_copy(line[crline+1],string_length('repeat count ')+1,string_length(line[crline+1])-string_length('repeat count ')));
@@ -28,6 +31,10 @@ else if (nss_check("wait ")) {hmany=string_copy(fstr,string_length('wait ')+1,st
     if (hmany!="") {wtime=30*string_convert_topos(hmany); waitingForComplete=1;}}
 if (nowait) {if (waitingForComplete) {waitingForComplete=0; nowait=0;}}
 crline+=shline;}
+
+if (timeLeft1!=0) {_xsclreq=1; if (object_index == objSNv_person) {_xsclreq=cuscale*xscale;} else if (object_index == objSNv_background) {_xsclreq=addbx*xscale;}
+    xoff+=(xcon)/(timeLeft1) + (xcon/2*(_xsclreq-1))/(timeLeft1); _time1+=1*Time.deltatime;
+    if (_time1>=timeLeft1) {timeLeft1=0; _time1=0; if (xmovingW) {waitingForComplete-=1;} xmovingW=0;}}
 
 
 

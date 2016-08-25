@@ -754,6 +754,7 @@
         <script>scripts\animation_storevar.gml</script>
         <script>scripts\animation_storevar_path.gml</script>
         <script>scripts\animation_produce.gml</script>
+        <script>scripts\animation_checktime.gml</script>
       </scripts>
       <script>scripts\draw_saves.gml</script>
       <script>scripts\draw_options_tab.gml</script>
@@ -937,6 +938,7 @@
   <objects name="objects">
     <objects name="Init">
       <object>objects\init</object>
+      <object>objects\social</object>
       <object>objects\lang</object>
       <object>objects\novel</object>
       <object>objects\gameDebug</object>
@@ -952,6 +954,7 @@
       <object>objects\objMenu</object>
       <object>objects\objEditor</object>
       <object>objects\object60</object>
+      <object>objects\objStore</object>
       <object>objects\objNMenu</object>
       <object>objects\objEmitter</object>
       <object>objects\objMusic</object>
@@ -999,6 +1002,8 @@
       <object>objects\objMenu_delete</object>
       <object>objects\objGUI_overwrite</object>
       <object>objects\objGUI_load</object>
+      <object>objects\objStore_preview</object>
+      <object>objects\objEd_upload</object>
     </objects>
     <objects name="HTML5">
       <object>objects\objHTML5_Menu</object>
