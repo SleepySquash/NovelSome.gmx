@@ -1,19 +1,17 @@
 //----------------------------------------------------NOVELSOME SCRIPT----------------------------------------------------//
 //----------------------------------------------------NOVELSOME SCRIPT----------------------------------------------------//
 //----------------------------------------------------NOVELSOME SCRIPT----------------------------------------------------//
-var __asddeb, __var, __strlength, __itwasimage, _storyLoad, _linkdb, _linkdb1;
+var __asddeb, __var, __strlength, __itwasimage, _storyLoad, _linkdb, _linkdb1, ____youshouldpass, __counttoskip;
 //
 //Needs to be declared before calling the script:
 //o     fstr - current line. Needs to be filled with a command.    o
 fstr = argument0;
 //o     _doingfrom - simply id of the object.                      o
 _doingfrom = argument1;
-//o     novid - id of novel in novel's array.                      o
+//o     novid - id of the novel in novel's array.                  o
 //o     _file - in case there's a file fstr is coming from.        o
 //o     lastline - int that equals 0.                              o
 //
-//Temp variables that should be used in case of adding commands cuz of RAM usage.
-//o     _str1 - temporary variable.      o
 
 //------------------------------------------------------LOGIC HANDLING------------------------------------------------------//
 //------------------------------------------------------LOGIC HANDLING------------------------------------------------------//
