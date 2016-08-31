@@ -1,0 +1,36 @@
+<NotepadPlus>
+    <UserLang name="NovelSome Script" ext="nsdat ndata ndraw nskin nschar nsanim nsmenu nshud nsback nscen">
+        <Settings>
+            <Global caseIgnored="yes" />
+            <TreatAsSymbol comment="no" commentLine="yes" />
+            <Prefix words1="no" words2="no" words3="no" words4="yes" />
+        </Settings>
+        <KeywordLists>
+            <Keywords name="Delimiters">&quot;00&quot;00</Keywords>
+            <Keywords name="Folder+">void if sprite</Keywords>
+            <Keywords name="Folder-">end</Keywords>
+            <Keywords name="Operators">! &quot; ( ) * + &lt; = &gt;</Keywords>
+            <Keywords name="Comment">1 1 2 2 0; 0//</Keywords>
+            <Keywords name="Words1">background show hide animation add customMenu custommenu Background CustomMenu Hide Show Animation Add scenario Scenario all parallax depth scale interpolation color ocolor name description dname interpolation offset d3d setstate</Keywords>
+            <Keywords name="Words2">wait var new font else with image link unlimited global object</Keywords>
+            <Keywords name="Words3">music ambient sound musicfadeout ambfadeout stop skin normal close far OnScan NovelMenuStart NovelStart spawn camera lookat mode scene d start linkto wall floor char nothing panorama cube sphere</Keywords>
+            <Keywords name="Words4">center cleft cright left right nowait animation: fademax: fade: x: y: player speed: number: fadein: fadeout: chid: nomusic nowelcome size depth: scale: name: refvalue description: background: scenario: custommenu: interpolation: offsetx: offsety: chid: lookatcamera followcamera nofollowcamera texture: scalex: scaley: scalez: z: x1: y1: z1: x2: y2: z2: solid lookat cuben: cubee: cubes: cubew: cubed: cubeu: hrepeat: vrepeat: cubef: cuber: cubek: cubet: cubel: cubeb: xrev yrev</Keywords>
+        </KeywordLists>
+        <Styles>
+            <WordsStyle name="DEFAULT" styleID="11" fgColor="CED7DB" bgColor="000000" colorStyle="0" fontName="" fontStyle="0" />
+            <WordsStyle name="FOLDEROPEN" styleID="12" fgColor="FF8080" bgColor="FFFFFF" colorStyle="1" fontName="" fontStyle="1" />
+            <WordsStyle name="FOLDERCLOSE" styleID="13" fgColor="FF8080" bgColor="FFFFFF" colorStyle="1" fontName="" fontStyle="0" />
+            <WordsStyle name="KEYWORD1" styleID="5" fgColor="FFFF00" bgColor="FFFFFF" colorStyle="1" fontName="" fontStyle="1" />
+            <WordsStyle name="KEYWORD2" styleID="6" fgColor="FF8000" bgColor="FFFFFF" colorStyle="1" fontName="" fontStyle="1" />
+            <WordsStyle name="KEYWORD3" styleID="7" fgColor="00FFFF" bgColor="FFFFFF" colorStyle="1" fontName="" fontStyle="1" />
+            <WordsStyle name="KEYWORD4" styleID="8" fgColor="FF80FF" bgColor="FFFFFF" colorStyle="1" fontName="" fontStyle="1" />
+            <WordsStyle name="COMMENT" styleID="1" fgColor="000000" bgColor="FFFFFF" fontName="" fontStyle="0" />
+            <WordsStyle name="COMMENT LINE" styleID="2" fgColor="757575" bgColor="FFFFFF" colorStyle="1" fontName="" fontStyle="0" />
+            <WordsStyle name="NUMBER" styleID="4" fgColor="FF8000" bgColor="FFFFFF" colorStyle="1" fontName="" fontStyle="0" />
+            <WordsStyle name="OPERATOR" styleID="10" fgColor="80FF80" bgColor="FFFFFF" colorStyle="1" fontName="" fontStyle="0" />
+            <WordsStyle name="DELIMINER1" styleID="14" fgColor="B0FFFF" bgColor="000000" colorStyle="1" fontName="@Microsoft YaHei UI" fontStyle="1" />
+            <WordsStyle name="DELIMINER2" styleID="15" fgColor="000000" bgColor="FFFFFF" fontName="" fontStyle="0" />
+            <WordsStyle name="DELIMINER3" styleID="16" fgColor="000000" bgColor="FFFFFF" fontName="" fontStyle="0" />
+        </Styles>
+    </UserLang>
+</NotepadPlus>
