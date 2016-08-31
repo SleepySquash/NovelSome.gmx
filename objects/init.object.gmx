@@ -27,7 +27,7 @@
             <kind>1</kind>
             <string>randomize();
 
-global.vernumber=45;
+global.vernumber=46;
 global.version="Update 0 build "+string(global.vernumber)+"";
 global.project="NovelSome";
 global.author="SlSq";

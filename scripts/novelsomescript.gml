@@ -980,73 +980,141 @@ else if (nss_check("hide ")) {_name=string_get_tillsymbol(fstr,string_length("hi
                         if (_fadeout!=-1) {_inst.fadeout=_fadeout;} if (_inst.fadeout==10000) {_inst.alpha=0;} _inst.dest=1; if (!_finst||nowait) {_inst.ntell=0;} waitingForComplete=1; _finst=0; if (chid!=0) {break;}}}}}}}
         chid=-1;} _c_showing=0; for (i=0;i<instance_number(objSNv_person);i+=1) {__a=instance_find(objSNv_person,i); if (!__a.dest) {_c_showing+=1;}} if (_c_showing==0) {global.persondepth=0;}}
 
+//-------------------------------------------THEN THE FIRST WORD IS A VARIABLE OR CHARACTER'S NAME-------------------------------------------//
+//-------------------------------------------THEN THE FIRST WORD IS A VARIABLE OR CHARACTER'S NAME-------------------------------------------//
+//-------------------------------------------THEN THE FIRST WORD IS A VARIABLE OR CHARACTER'S NAME-------------------------------------------//
 else {cmd=string_get_tillsymbol(fstr,1," "); if (cmd!="") {
-        if (string_copys(fstr,string_length(cmd)+2,1)=='"') {
-            chaid=-1; _chaid=ds_map_find_value(_linkdb,cmd); if (is_undefined(_chaid)) {chaid=person_exists(cmd);} else {
-            if (instance_exists(_chaid)) {if (_chaid.object_index == objSNv_person) {chaid=_chaid.bnum;}}}
-            if (chaid!=-1) {phrase=string_convert_withpluses(string_copy(fstr,string_length(cmd+' ')+1,string_length(fstr)-string_length(cmd+' '))); if (phrase!="") {
-                    _actor=novdat.dchar[novid,chaid]; if (string_copy(_actor,1,1)!='"') {_actor=string_convert_topos_string(_actor);} else {_actor=string_replace_all(_actor,'"',"");}
-                    global.diWindow=dialwin; dialog_text(0,noone,_actor,phrase); dialog_customize(isdialpos,dialposx,dialposy,dialwin,dialcolor,dialoutcl,dialfull);
-                    dialog_acolor(0,novdat.charclr[novid,chaid],novdat.charoutclr[novid,chaid]); dialog_deadend(1); waitingForComplete=1;}
-                } else {if (rEnd==2) {rEnd=3;} if (global.debug) {if (__asddeb) {with (objGUI_chat) {chat_add_color("Unknown action (perhaps character not found?): '"+string(other.fstr)+"'",c_red);}}}}
-        } else {cmd1=string_get_tillsymbol(fstr,string_length(cmd)+2," "); if (string_copys(cmd1,1,string_length("setstate")) == "setstate") {
-            cmd3=string_copy(fstr,string_length(cmd)+string_length(cmd1)+3,string_length(fstr)-(string_length(cmd)+string_length(cmd1)+2));
-            if (cmd3!="") {chaid=-1; _chaid=ds_map_find_value(_linkdb,cmd); if (is_undefined(_chaid)) {chaid=person_exists(cmd);} else {
-                if (instance_exists(_chaid)) {if (_chaid.object_index == objSNv_person) {chaid=_chaid.bnum; chid=-2;}}} if (chaid!=-1) {
-                    if (chid==-2) {_pers=_chaid; if (instance_exists(_pers)) {with (_pers) {sprState=other.cmd3;
-                        for (i=0;i<acount;i+=1) {if (sprite_exists(aimage[i])) {sprite_delete(aimage[i]);}} acount=0; person_alarm0();}}}
-                    else if (chid==-1) {_pers=novdat.charperson[novid,(chaid)]; if (instance_exists(_pers)) {with (_pers) {sprState=other.cmd3;
-                        for (i=0;i<acount;i+=1) {if (sprite_exists(aimage[i])) {sprite_delete(aimage[i]);}} acount=0; person_alarm0();}}}
-                    else if (chid==0) {_finst=1; _lc=ds_list_size(novdat.charoflist[novid,(chaid)]); for (i=_lc-1;i>=0;i-=1) {_inst=ds_list_find_value(novdat.charoflist[novid,(chaid)],i);
-                        if (instance_exists(_inst)) {with (_inst) {sprState=other.cmd3; for (i=0;i<acount;i+=1) {if (sprite_exists(aimage[i])) {sprite_delete(aimage[i]);}} acount=0; person_alarm0();}}}}
-                    else {crinst=1; bin=0; for (i=0;i<ds_list_size(novdat.charoflist[novid,(chaid)]);i+=1) {_inst=ds_list_find_value(novdat.charoflist[novid,(chaid)],i); if (instance_exists(_inst)) {if (crinst==chid) {
-                        with (_inst) {sprState=other.cmd3; for (i=0;i<acount;i+=1) {if (sprite_exists(aimage[i])) {sprite_delete(aimage[i]);}} acount=0; person_alarm0();}} crinst+=1;}}} chid=-1;}}
-            } else {if (_linked=="") {if (string_count('=',fstr)+string_count('+',fstr)+string_count('*',fstr)>0) {_yeahthatsright=0; for (_vi=1;_vi<string_length(fstr);_vi+=1) {
-                    if (string_copy(fstr,_vi,1) == '=' || string_copy(fstr,_vi,1) == '+' || string_copy(fstr,_vi,1) == '-' || string_copy(fstr,_vi,2) == '*=' || string_copy(fstr,_vi,2) == '/=') {
-                        _linked=string_copy(fstr,1,_vi-1); _am_toskip=0; if (string_copy(fstr,_vi,1) == '=') {_am_toskip=1;}
-                        fstr=string_copy(fstr,_vi+_am_toskip,string_length(fstr)-_vi+1+(-1*_am_toskip));
-                        while (string_copy(_linked,string_length(_linked),1) == " ") {if (string_length(_linked)<=1) {break;} else {_linked = string_copy(_linked,1,string_length(_linked)-1);}}
-                        while (string_copy(_linked,1,1) == " ") {if (string_length(_linked)<=1) {break;} else {_linked = string_copy(_linked,2,string_length(_linked)-1);}}
-                        while (string_copy(fstr,1,1) == " ") {if (string_length(fstr)<=1) {break;} else {fstr = string_copy(fstr,2,string_length(fstr)-1);}}
-                        while (string_copy(fstr,1,1) == "=") {if (string_length(fstr)<=1) {break;} else {fstr = string_copy(fstr,2,string_length(fstr)-1);}}
-                        while (string_copy(fstr,1,1) == " ") {if (string_length(fstr)<=1) {break;} else {fstr = string_copy(fstr,2,string_length(fstr)-1);}}
-                        break;}}}}
-                
-                ____youshouldpass=1; if (_linked!="") {if (ds_map_exists(_linkdb,_linked)) {
-                    __v=ds_map_find_value(_linkdb,_linked); if (!is_undefined(__v)) {___gopass=1;
-                        if (ds_map_exists(_linkdb1,_linked)) {__v1=ds_map_find_value(_linkdb1,_linked);
-                            if (!is_undefined(__v1)) {if (__v1=="instance") {___gopass=0;}}}
-                        if (___gopass) {if (!is_string(__v)) {
-                            if (nss_check("+=")) {_secpart=string_copy(fstr,3,string_length(fstr)-2); if (_secpart!="") {
-                                ds_map_replace(_linkdb,_linked,__v+string_convert_topos(_secpart)); ____youshouldpass=0;}}
-                            else if (nss_check("++")) {ds_map_replace(_linkdb,_linked,__v+1);}
-                            else if (nss_check("-=")) {_secpart=string_copy(fstr,3,string_length(fstr)-2); if (_secpart!="") {
-                                ds_map_replace(_linkdb,_linked,__v-string_convert_topos(_secpart)); ____youshouldpass=0;}}
-                            else if (nss_check("--")) {ds_map_replace(_linkdb,_linked,__v-1);}
-                            else if (nss_check("*=")) {_secpart=string_copy(fstr,3,string_length(fstr)-2); if (_secpart!="") {
-                                ds_map_replace(_linkdb,_linked,__v*string_convert_topos(_secpart)); ____youshouldpass=0;}}
-                            else if (nss_check("/=")) {_secpart=string_copy(fstr,3,string_length(fstr)-2); if (_secpart!="") {
-                                ds_map_replace(_linkdb,_linked,__v/string_convert_topos(_secpart)); ____youshouldpass=0;}}}
-                        else {
-                            if (nss_check("+=")) {_secpart=string_copy(fstr,3,string_length(fstr)-2); if (_secpart!="") {
-                                ds_map_replace(_linkdb,_linked,__v+string_convert_topos_string(_secpart)); ____youshouldpass=0;}}
-                        }}}}}
-                
-                if (_linked!="") {if (____youshouldpass) {_cmd1=fstr; _dontdo=0; if (ds_map_exists(_linkdb1,_cmd1)) {__v1=ds_map_find_value(_linkdb1,_cmd1); if (!is_undefined(__v1)) {
-                            if (ds_map_exists(_linkdb,_cmd1)) {__v=ds_map_find_value(_linkdb,_cmd1); if (!is_undefined(__v)) {switch (__v1) {default: break;
-                                case "instance": ds_map_replace(_linkdb,_linked,__v); ds_map_replace(_linkdb1,_linked,__v1); _dontdo=1; break;
-                                case "font": ds_map_replace(_linkdb,_linked,__v); ds_map_replace(_linkdb1,_linked,__v1); _dontdo=1; break;}}}}}
-                        if (!_dontdo) {if (string_count('"',_cmd1) > 0) {_cmd1=string_convert_withpluses(_cmd1);
-                                ds_map_replace(_linkdb,_linked,_cmd1); if (ds_map_exists(_linkdb1,_linked)) {ds_map_delete(_linkdb1,_linked);}}
-                            else {_cmd1=string_convert_topos_stringonly(_cmd1); _str=check_for_nonnumber(_cmd1); if (_str==_cmd1) {
-                                _str=string_convert_topos(_str); ds_map_replace(_linkdb,_linked,_str); if (ds_map_exists(_linkdb1,_linked)) {ds_map_delete(_linkdb1,_linked);}}}
-                }}} else {if (rEnd==2) {rEnd=3;} if (global.debug) {if (__asddeb) {with (objGUI_chat) {chat_add_color("Unknown action: '"+string(other.fstr)+"'",c_red);}}}}}}
+    if (string_copys(fstr,string_length(cmd)+2,1)=='"') {
+        chaid=-1; _chaid=ds_map_find_value(_linkdb,cmd); if (is_undefined(_chaid)) {chaid=person_exists(cmd);} else {
+        if (instance_exists(_chaid)) {if (_chaid.object_index == objSNv_person) {chaid=_chaid.bnum;}}}
+        if (chaid!=-1) {phrase=string_convert_withpluses(string_copy(fstr,string_length(cmd+' ')+1,string_length(fstr)-string_length(cmd+' '))); if (phrase!="") {
+                _actor=novdat.dchar[novid,chaid]; if (string_copy(_actor,1,1)!='"') {_actor=string_convert_topos_string(_actor);} else {_actor=string_replace_all(_actor,'"',"");}
+                global.diWindow=dialwin; dialog_text(0,noone,_actor,phrase); dialog_customize(isdialpos,dialposx,dialposy,dialwin,dialcolor,dialoutcl,dialfull);
+                dialog_acolor(0,novdat.charclr[novid,chaid],novdat.charoutclr[novid,chaid]); dialog_deadend(1); waitingForComplete=1;}
+            } else {if (rEnd==2) {rEnd=3;} if (global.debug) {if (__asddeb) {with (objGUI_chat) {chat_add_color("Unknown action (perhaps character not found?): '"+string(other.fstr)+"'",c_red);}}}}
+    } else {cmd1=string_get_tillsymbol(fstr,string_length(cmd)+2," ");
+        if (string_copys(cmd1,1,string_length("setstate")) == "setstate") {
+            _fadein=0; _fadeout=0; _states=0; _image=""; _pos=""; _xrev=-2; _yrev=-2; _sosx=0; _sosy=0; _osx=""; _osy=""; _interpolation=1; _cuposxset=0; _cuposyset=0;
+            _depset=0; _parset=0; _depth=0; _parallax=global.charOMove_n; _scale=1; _scaleset=0; _cuposx=0; _cuposy=0; _fademax=-1; animPath=""; animFname="";
+            ipos=string_length(cmd)+1+string_length(cmd1)+1+1; while (ipos<=string_length(fstr)) {_str2=string_get_tillsymbol(fstr,ipos,' ');
+                if (string_copy(_str2,1,string_length("left")) == "left") {_pos="left";}
+                else if (string_copy(_str2,1,string_length("cleft")) == "cleft") {_pos="cleft";}
+                else if (string_copy(_str2,1,string_length("center")) == "center") {_pos="center";}
+                else if (string_copy(_str2,1,string_length("cright")) == "cright") {_pos="cright";}
+                else if (string_copy(_str2,1,string_length("right")) == "right") {_pos="right";}
+                else if (string_copy(_str2,1,string_length("xrev")) == "xrev") {_xrev=-1;}
+                else if (string_copy(_str2,1,string_length("yrev")) == "yrev") {_yrev=-1;}
+                else if (string_copy(_str2,1,string_length("offsetx:")) == "offsetx:") {_sosx=1; _osx=string_copy(_str2,string_length("offsetx:")+1,string_length(_str2)-string_length("offsetx:"));}
+                else if (string_copy(_str2,1,string_length("offsetx:")) == "offsety:") {_sosy=1; _osy=string_copy(_str2,string_length("offsetx:")+1,string_length(_str2)-string_length("offsetx:"));}
+                else if (string_copy(_str2,1,string_length("interpolation:")) == "interpolation:") {_interpolation=string_copy(_str2,string_length("interpolation:")+1,string_length(_str2)-string_length("interpolation:"));}
+                else if (string_copy(_str2,1,string_length("depth:")) == "depth:") {_dset=string_copy(_str2,string_length("depth:")+1,string_length(_str2)-string_length("depth:"));
+                    _depth=person_guess_depth(); _depset=1; if (__guess_guessed) {if (!_parset) {_parset=1; _pset=_dset; _parallax=person_guess_parallax();}}}
+                else if (string_copy(_str2,1,string_length("parallax:")) == "parallax:") {_pset=string_copy(_str2,string_length("parallax:")+1,string_length(_str2)-string_length("parallax:"));
+                    _parallax=person_guess_parallax(); _parset=1; if (__guess_guessed) {if (!_depset) {_depset=1; _dset=_pset; _depth=person_guess_depth();}}}
+                else if (string_copy(_str2,1,string_length("scale:")) == "scale:") {_scaleset=1;
+                    _scale=string_convert_topos(string_copy(_str2,string_length("scale:")+1,string_length(_str2)-string_length("scale:")));}
+                else if (string_copy(_str2,1,string_length("x:")) == "x:") {_pos="custom"; _cuposxset=1;
+                    _cuposx=string_convert_tocupos(string_copy(_str2,string_length("x:")+1,string_length(_str2)-string_length("x:")));}
+                else if (string_copy(_str2,1,string_length("y:")) == "y:") {_cuposyset=1;
+                    _cuposy=string_convert_tocupos(string_copy(_str2,string_length("y:")+1,string_length(_str2)-string_length("y:")));}
+                else if (string_copy(_str2,1,string_length("fade:")) == "fade:") {
+                    _str3=string_convert_topos(string_copy(_str2,string_length("fade:")+1,string_length(_str2)-string_length("fade:")));
+                    if (_str3!=0) {_fadeout = 1/(30*_str3);} else {_fadeout=0;} _fadein=_fadeout;}
+                else if (string_copy(_str2,1,string_length("fadein:")) == "fadein:") {
+                    _str3=string_convert_topos(string_copy(_str2,string_length("fadein:")+1,string_length(_str2)-string_length("fadein:")));
+                    if (_str3!=0) {_fadein = 1/(30*_str3);} else {_fadein=0;}}
+                else if (string_copy(_str2,1,string_length("fadeout:")) == "fadeout:") {
+                    _str3=string_convert_topos(string_copy(_str2,string_length("fadeout:")+1,string_length(_str2)-string_length("fadeout:")));
+                    if (_str3!=0) {_fadeout = 1/(30*_str3);} else {_fadeout=0;}}
+                else if (string_copy(_str2,1,string_length('"')) == '"') {_image=string_get_tillsymbol(fstr,ipos+1,'"'); _str2='"'+_image+'"';}
+                else if (string_copy(_str2,1,string_length("chid:")) == "chid:") {
+                    _str3=string_copy(_str2,string_length("chid:")+1,string_length(_str2)-string_length("chid:"));
+                    if (_str3=="all") {chid=0;} else {chid=real(_str3);}}
+                else if (string_copy(_str2,1,string_length("fademax:")) == "fademax:") {
+                    _str3=string_copy(_str2,string_length("fademax:")+1,string_length(_str2)-string_length("fademax:")); _fademax=string_convert_topos(_str3);}
+                else if (string_copy(_str2,1,string_length("alpha:")) == "alpha:") {
+                    _str3=string_copy(_str2,string_length("alpha:")+1,string_length(_str2)-string_length("alpha:")); _fademax=string_convert_topos(_str3);}
+                else if (string_copy(_str2,1,string_length("animation:")) == "animation:") {
+                    if (string_copy(_str2,string_length("animation:")+1,1) == '"') {
+                        _str3=string_get_tillsymbol(fstr,ipos+string_length("animation:")+1,'"');}
+                    else {_str3=string_get_tillsymbol(fstr,ipos+string_length("animation:"),' ');}
+                    if (_str3!="") {_path=""; if (_str3!="stop" && _str3!="clear" && _str3!="none") {
+                        _path=novdat.FolName[novid]; if (string_copy(_str3,1,string_length("Stuff/"))=="Stuff/") {_path=_str3;} else if (string_copy(_str3,1,string_length("Stuff\"))=="Stuff\") {_path=_str3;}
+                        if (_path!=_str3) {if (!file_exists(current_directory()+_path+_str3)) {if (file_exists(current_directory()+_path+"animation\"+_str3)) {_str3="animation\"+_str3;}
+                            else if (file_exists(current_directory()+_path+"animations\"+_str3)) {_str3="animations\"+_str3;}}} else {_path="";}}
+                        animPath=_path; animFname=_str3;}}
+                else if (!nss_afterscript(_str2)) {_state[_states]=_str2; _states+=1;} ipos+=string_length(_str2)+1;}
+            _asimp=1; _path=""; if (_image!="") {_path=novdat.FolName[novid]; _originalname=_image; if (string_copy(_image,1,string_length("Stuff/")) == "Stuff/"
+                    || string_copy(_image,1,string_length("Stuff/")) == "Stuff\") {_path="";}
+                else {if (!file_exists(current_directory()+_path+_image)) {
+                    if (file_exists(current_directory()+_path+"images\"+_image)) {_image="images\"+_image;}
+                    else if (file_exists(current_directory()+_path+"sprites\"+_image)) {_image="sprites\"+_image;}
+                    else if (file_exists(current_directory()+_path+"characters\"+_image)) {_image="characters\"+_image;}
+                    else if (file_exists(current_directory()+_path+"characters\images\"+_image)) {_image="characters\images\"+_image;}
+                    else if (file_exists(current_directory()+_path+"characters\sprites\"+_image)) {_image="characters\sprites\"+_image;}
+                    else if (file_exists(current_directory()+_path+"characters\sprite\"+_image)) {_image="characters\sprite\"+_image;}
+                    else if (file_exists(current_directory()+_path+"characters\image\"+_image)) {_image="characters\image\"+_image;}}}}
+            if (_asimp) {_pass=(_states>0);} else {_pass=(_image != ""); if (_pass) {_pass=(file_exists(current_directory()+_path+_image));}}
+            if (_pass) {chaid=-1; _chaid=ds_map_find_value(_linkdb,cmd); if (is_undefined(_chaid)) {chaid=person_exists(cmd);} else {
+                if (instance_exists(_chaid)) {if (_chaid.object_index == objSNv_person) {chaid=_chaid.bnum; chid=-2;}}}
+                _dopass=(chaid!=-1); if (chid == -2) {_dopass=1;} if (_dopass) {_finst=1;
+                    if (chid==-2) {_inst=_chaid; if (instance_exists(_inst)) {nss_setstate(_inst);}}
+                    else if (chid==-1) {_inst=novdat.charperson[novid,(chaid)]; if (instance_exists(_inst)) {nss_setstate(_inst);}}
+                    else if (chid==0) {_lc=ds_list_size(novdat.charoflist[novid,(chaid)]);
+                        for (i=_lc-1;i>=0;i-=1) {_inst=ds_list_find_value(novdat.charoflist[novid,(chaid)],i);
+                            if (instance_exists(_inst)) {nss_setstate(_inst);}}}
+                    else {crinst=1; bin=0; for (i=0;i<ds_list_size(novdat.charoflist[novid,(chaid)]);i+=1) {
+                        _inst=ds_list_find_value(novdat.charoflist[novid,(chaid)],i); if (instance_exists(_inst)) {
+                            if (crinst==chid) {nss_setstate(_inst);} crinst+=1;}}} chid=-1;}}
+        } else {if (_linked=="") {if (string_count('=',fstr)+string_count('+',fstr)+string_count('*',fstr)>0) {_yeahthatsright=0; for (_vi=1;_vi<string_length(fstr);_vi+=1) {
+                if (string_copy(fstr,_vi,1) == '=' || string_copy(fstr,_vi,1) == '+' || string_copy(fstr,_vi,1) == '-' || string_copy(fstr,_vi,2) == '*=' || string_copy(fstr,_vi,2) == '/=') {
+                    _linked=string_copy(fstr,1,_vi-1); _am_toskip=0; if (string_copy(fstr,_vi,1) == '=') {_am_toskip=1;}
+                    fstr=string_copy(fstr,_vi+_am_toskip,string_length(fstr)-_vi+1+(-1*_am_toskip));
+                    while (string_copy(_linked,string_length(_linked),1) == " ") {if (string_length(_linked)<=1) {break;} else {_linked = string_copy(_linked,1,string_length(_linked)-1);}}
+                    while (string_copy(_linked,1,1) == " ") {if (string_length(_linked)<=1) {break;} else {_linked = string_copy(_linked,2,string_length(_linked)-1);}}
+                    while (string_copy(fstr,1,1) == " ") {if (string_length(fstr)<=1) {break;} else {fstr = string_copy(fstr,2,string_length(fstr)-1);}}
+                    while (string_copy(fstr,1,1) == "=") {if (string_length(fstr)<=1) {break;} else {fstr = string_copy(fstr,2,string_length(fstr)-1);}}
+                    while (string_copy(fstr,1,1) == " ") {if (string_length(fstr)<=1) {break;} else {fstr = string_copy(fstr,2,string_length(fstr)-1);}}
+                    break;}}}}
+            
+            ____youshouldpass=1; if (_linked!="") {if (ds_map_exists(_linkdb,_linked)) {
+                __v=ds_map_find_value(_linkdb,_linked); if (!is_undefined(__v)) {___gopass=1;
+                    if (ds_map_exists(_linkdb1,_linked)) {__v1=ds_map_find_value(_linkdb1,_linked);
+                        if (!is_undefined(__v1)) {if (__v1=="instance") {___gopass=0;}}}
+                    if (___gopass) {if (!is_string(__v)) {
+                        if (nss_check("+=")) {_secpart=string_copy(fstr,3,string_length(fstr)-2); if (_secpart!="") {
+                            ds_map_replace(_linkdb,_linked,__v+string_convert_topos(_secpart)); ____youshouldpass=0;}}
+                        else if (nss_check("++")) {ds_map_replace(_linkdb,_linked,__v+1);}
+                        else if (nss_check("-=")) {_secpart=string_copy(fstr,3,string_length(fstr)-2); if (_secpart!="") {
+                            ds_map_replace(_linkdb,_linked,__v-string_convert_topos(_secpart)); ____youshouldpass=0;}}
+                        else if (nss_check("--")) {ds_map_replace(_linkdb,_linked,__v-1);}
+                        else if (nss_check("*=")) {_secpart=string_copy(fstr,3,string_length(fstr)-2); if (_secpart!="") {
+                            ds_map_replace(_linkdb,_linked,__v*string_convert_topos(_secpart)); ____youshouldpass=0;}}
+                        else if (nss_check("/=")) {_secpart=string_copy(fstr,3,string_length(fstr)-2); if (_secpart!="") {
+                            ds_map_replace(_linkdb,_linked,__v/string_convert_topos(_secpart)); ____youshouldpass=0;}}}
+                    else {
+                        if (nss_check("+=")) {_secpart=string_copy(fstr,3,string_length(fstr)-2); if (_secpart!="") {
+                            ds_map_replace(_linkdb,_linked,__v+string_convert_topos_string(_secpart)); ____youshouldpass=0;}}
+                    }}}}}
+            
+            if (_linked!="") {if (____youshouldpass) {_cmd1=fstr; _dontdo=0; if (ds_map_exists(_linkdb1,_cmd1)) {__v1=ds_map_find_value(_linkdb1,_cmd1); if (!is_undefined(__v1)) {
+                        if (ds_map_exists(_linkdb,_cmd1)) {__v=ds_map_find_value(_linkdb,_cmd1); if (!is_undefined(__v)) {switch (__v1) {default: break;
+                            case "instance": ds_map_replace(_linkdb,_linked,__v); ds_map_replace(_linkdb1,_linked,__v1); _dontdo=1; break;
+                            case "font": ds_map_replace(_linkdb,_linked,__v); ds_map_replace(_linkdb1,_linked,__v1); _dontdo=1; break;}}}}}
+                    if (!_dontdo) {if (string_count('"',_cmd1) > 0) {_cmd1=string_convert_withpluses(_cmd1);
+                            ds_map_replace(_linkdb,_linked,_cmd1); if (ds_map_exists(_linkdb1,_linked)) {ds_map_delete(_linkdb1,_linked);}}
+                        else {_cmd1=string_convert_topos_stringonly(_cmd1); _str=check_for_nonnumber(_cmd1); if (_str==_cmd1) {
+                            _str=string_convert_topos(_str); ds_map_replace(_linkdb,_linked,_str); if (ds_map_exists(_linkdb1,_linked)) {ds_map_delete(_linkdb1,_linked);}}}
+            }}} else {if (rEnd==2) {rEnd=3;} if (global.debug) {if (__asddeb) {with (objGUI_chat) {chat_add_color("Unknown action: '"+string(other.fstr)+"'",c_red);}}}}}}
     } else {if (rEnd==2) {rEnd=3;} if (global.debug) {if (__asddeb) {with (objGUI_chat) {chat_add_color("Unknown action: '"+string(other.fstr)+"'",c_red);}}}}}
 }
 }
 }
 }
 
+//-------------------------------------------CHECK IF THE FILE WAS EXECUTED THROUGH "execute" COMMAND-------------------------------------------//
+//-------------------------------------------CHECK IF THE FILE WAS EXECUTED THROUGH "execute" COMMAND-------------------------------------------//
+//-------------------------------------------CHECK IF THE FILE WAS EXECUTED THROUGH "execute" COMMAND-------------------------------------------//
 if (_file!=-1) {_n_pass=1; if (_doingfrom.object_index == novel) {_n_pass=(!novel.waitingForComplete && fstr=="");}
     if (file_text_eof(_file) && _n_pass) {if (ds_list_size(_nss_script)>0) {
     __n_value=ds_list_find_value(_nss_script,ds_list_size(_nss_script)-1);

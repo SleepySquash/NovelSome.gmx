@@ -303,6 +303,19 @@ if (saving) {_needlocal=0; if (global.gameBundle!=-1) {_savefolder="";} else {
         csfile_text_write_string(file,"p alpha "+string(aobj.alpha)); csfile_text_writeln(file);
         csfile_text_write_string(file,"p dest "+string(aobj.dest)); csfile_text_writeln(file);
         csfile_text_write_string(file,"p yscale "+string(aobj.yscale)); csfile_text_writeln(file);
+        csfile_text_write_string(file,"p additionaldrawing "+string(aobj.additionaldrawing)); csfile_text_writeln(file);
+        if (aobj.additionaldrawing) {csfile_text_write_string(file,"p adr_tell "+string(aobj.adr_tell)); csfile_text_writeln(file);
+            csfile_text_write_string(file,"p adr_doy "+string(aobj.adr_doy)); csfile_text_writeln(file);
+            csfile_text_write_string(file,"p adr_dox "+string(aobj.adr_dox)); csfile_text_writeln(file);
+            csfile_text_write_string(file,"p adr_yrev "+string(aobj.adr_yrev)); csfile_text_writeln(file);
+            csfile_text_write_string(file,"p adr_xrev "+string(aobj.adr_xrev)); csfile_text_writeln(file);
+            csfile_text_write_string(file,"p adr_cuscale "+string(aobj.adr_cuscale)); csfile_text_writeln(file);
+            csfile_text_write_string(file,"p adr_cuposy "+string(aobj.adr_cuposy)); csfile_text_writeln(file);
+            csfile_text_write_string(file,"p adr_cuposx "+string(aobj.adr_cuposx)); csfile_text_writeln(file);
+            csfile_text_write_string(file,"p adr_posx "+string(aobj.adr_posx)); csfile_text_writeln(file);
+            csfile_text_write_string(file,"p adr_fadeout "+string(aobj.adr_fadeout)); csfile_text_writeln(file);
+            csfile_text_write_string(file,"p adr_alpha "+string(aobj.adr_alpha)); csfile_text_writeln(file);
+            csfile_text_write_string(file,"p adr_imp "+string(aobj.adr_imp)); csfile_text_writeln(file);}
         csfile_text_write_string(file,"p itpath "+string(aobj.itpath)); csfile_text_writeln(file);
         csfile_text_write_string(file,"p itfname "+string(aobj.itfname)); csfile_text_writeln(file);
         csfile_text_write_string(file,"p sint "+string(aobj.sint)); csfile_text_writeln(file);

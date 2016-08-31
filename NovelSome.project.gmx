@@ -596,6 +596,7 @@
         <script>scripts\nss_extbegin.gml</script>
         <script>scripts\nss_extend.gml</script>
         <script>scripts\nss_handle_logic.gml</script>
+        <script>scripts\nss_setstate.gml</script>
       </scripts>
       <scripts name="Window">
         <script>scripts\window_set_resolution.gml</script>

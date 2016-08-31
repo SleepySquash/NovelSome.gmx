@@ -203,7 +203,7 @@ if (f==2) {with (objGUI_ingame) {for (i=1;i&lt;=global.savCount;i+=1) {thspr[i]=
                 _path = _ski; global.skChanged_isFN=0;} else {_path = novdat.FolName[novid]+"\"+_ski; global.skChanged_isFN=1;} global.skChanged_path=_ski;
             skin_deapply(); skin_apply_path(current_directory()+_path,filename_path(_path)); global.skinChanged=1;}}}
         ini_close();} if (global.loading) {_wasLoading=1; f=3;} else {f=4;}}
-if (f==3) {instance_create(0,0,novel); rprogress=0; _skpath=""; _neededlineskip=novdat.isObsolete[novid]; _skisFN=-1; _scenarioToLoad=""; waitobj=noone; hudobj=noone;
+if (f==3) {instance_create(0,0,novel); rprogress=0; _skpath=""; _neededlineskip=novdat.isObsolete[novid]; _skisFN=-1; _scenarioToLoad=""; waitobj=noone; hudobj=noone; additionaldrawing=0;
     file=csfile_text_open_read(global.loadingFile); trReading=0; linkReading=0; person=noone; background=noone; while (!csfile_text_eof(file)) {
         fstr=csfile_text_read_string(file); csfile_text_readln(file); if (trReading) {if (linkReading) {
             if (string_copy(fstr,1,string_length("links end"))=="links end") {linkReading=0; trReading=0;} else {
@@ -372,6 +372,8 @@ if (f==3) {instance_create(0,0,novel); rprogress=0; _skpath=""; _neededlineskip=
         else if (string_copy(fstr,1,string_length("p xrev "))=="p xrev ") {if (instance_exists(person)) {gvar=(string_copy(fstr,string_length("p xrev ")+1,string_length(fstr)-string_length("p xrev "))); if (gvar!="") {person.xrev=real(gvar);}}}
         else if (string_copy(fstr,1,string_length("p yrev "))=="p yrev ") {if (instance_exists(person)) {gvar=(string_copy(fstr,string_length("p yrev ")+1,string_length(fstr)-string_length("p yrev "))); if (gvar!="") {person.yrev=real(gvar);}}}
         else if (string_copy(fstr,1,string_length("p dest "))=="p dest ") {if (instance_exists(person)) {gvar=(string_copy(fstr,string_length("p dest ")+1,string_length(fstr)-string_length("p dest "))); if (gvar!="") {person.dest=real(gvar);}}}
+        else if (string_copy(fstr,1,string_length("p additionaldrawing "))=="p additionaldrawing ") {if (instance_exists(person)) {gvar=(string_copy(fstr,string_length("p additionaldrawing ")+1,string_length(fstr)-string_length("p additionaldrawing "))); if (gvar!="") {/*person.additionaldrawing=real(gvar);*/}}}
+        else if (string_copy(fstr,1,string_length("p adr_tell "))=="p adr_tell ") {if (instance_exists(person)) {gvar=(string_copy(fstr,string_length("p adr_tell ")+1,string_length(fstr)-string_length("p adr_tell "))); if (gvar!="") {/*person.adr_tell=real(gvar);*/ if (real(gvar)&gt;0) {additionaldrawing=1;}}}}
         else if (string_copy(fstr,1,string_length("p itpath "))=="p itpath ") {if (instance_exists(person)) {gvar=(string_copy(fstr,string_length("p itpath ")+1,string_length(fstr)-string_length("p itpath "))); if (gvar!="") {person.itpath=(gvar);}}}
         else if (string_copy(fstr,1,string_length("p itfname "))=="p itfname ") {if (instance_exists(person)) {gvar=(string_copy(fstr,string_length("p itfname ")+1,string_length(fstr)-string_length("p itfname "))); if (gvar!="") {person.itfname=(gvar);}}}
         else if (string_copy(fstr,1,string_length("p sint "))=="p sint ") {if (instance_exists(person)) {gvar=(string_copy(fstr,string_length("p sint ")+1,string_length(fstr)-string_length("p sint "))); if (gvar!="") {person.sint=real(gvar);}}}
@@ -598,7 +600,7 @@ if (f==3) {instance_create(0,0,novel); rprogress=0; _skpath=""; _neededlineskip=
         else if (string_copy(fstr,1,string_length("h hudHide "))=="h hudHide ") {if (instance_exists(objhud)) {def=(string_copy(fstr,string_length("h hudHide ")+1,string_length(fstr)-string_length("h hudHide "))); if (def!="") {objhud.hudHide=real(def);}}}
         else if (string_copy(fstr,1,string_length("h fadeintell "))=="h fadeintell ") {if (instance_exists(objhud)) {def=(string_copy(fstr,string_length("h fadeintell ")+1,string_length(fstr)-string_length("h fadeintell "))); if (def!="") {objhud.fadeintell=real(def);}}}
         else if (string_copy(fstr,1,string_length("h fadeouttell "))=="h fadeouttell ") {if (instance_exists(objhud)) {def=(string_copy(fstr,string_length("h fadeouttell ")+1,string_length(fstr)-string_length("h fadeouttell "))); if (def!="") {objhud.fadeouttell=real(def);}}}        
-        }} csfile_text_close(file);
+        }} if (novel.waitingForComplete &amp;&amp; additionaldrawing) {novel.waitingForComplete=0;} csfile_text_close(file);
         if (_scenarioToLoad=="") {notcen_add("E",lang.save_is_corrupted); global.loading=0;
             game_deinit(); if (!global.isTesting) {room_goto(global.lRMenu);} else {global.nEDid=novid;
             global.isNExists=novid; room_goto(room_editor);} if (_isini) {ini_close();} instance_destroy(); exit;}
